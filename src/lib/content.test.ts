@@ -7,7 +7,7 @@ describe("content layer", () => {
 
     const data = await getBlogData({});
 
-    expect(data.settings.title).toBe("刘涛的产品实验室");
+    expect(data.settings.title).toBe("Todd的人生记录册");
     expect(data.posts.length).toBeGreaterThan(0);
     expect(data.categories.map((category) => category.slug)).toContain("product-thinking");
   });

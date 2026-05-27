@@ -48,11 +48,11 @@ const tags = [
 
 export const demoData: BlogData = {
   settings: {
-    name: "刘涛",
-    title: "刘涛的产品实验室",
-    slogan: "在产品、AI 与个人知识系统之间搭桥。",
+    name: "Todd",
+    title: "Todd的人生记录册",
+    slogan: "热爱可抵岁月漫长",
     description:
-      "一个互联网产品经理的个人博客，记录产品思考、技术教程、AI 工作流、作品案例与生活观察。",
+      "一个个人博客，记录产品思考、AI 工作流、工作案例与生活观察。",
     avatar: "",
     heroImage:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1800&q=80",

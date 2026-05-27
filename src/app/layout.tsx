@@ -15,10 +15,10 @@ const navItems = [
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "刘涛的产品实验室",
-    template: "%s | 刘涛的产品实验室"
+    default: "Todd的人生记录册",
+    template: "%s | Todd的人生记录册"
   },
-  description: "互联网产品经理的个人博客，记录产品思考、技术教程、AI 工作流、作品案例与生活观察。"
+  description: "一个个人博客，记录产品思考、AI 工作流、工作案例与生活观察。"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="container topbar-inner">
               <Link className="brand" href="/">
                 <span className="brand-mark">LT</span>
-                <span>刘涛的产品实验室</span>
+                <span>Todd的人生记录册</span>
               </Link>
               <nav className="nav" aria-label="主导航">
                 {navItems.map((item) => (
@@ -44,7 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <footer className="footer">
             <div className="container footer-inner">
-              <span>© 2026 刘涛的产品实验室</span>
+              <span>© 2026 Todd的人生记录册</span>
               <span>Built with Next.js, Vercel and Sanity.</span>
             </div>
           </footer>
