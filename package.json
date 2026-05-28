@@ -12,9 +12,6 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@portabletext/react": "latest",
-    "@sanity/client": "latest",
-    "@sanity/image-url": "latest",
     "@vercel/analytics": "latest",
     "lucide-react": "latest",
     "next": "latest",

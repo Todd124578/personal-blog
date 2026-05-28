@@ -80,20 +80,7 @@ export const demoData: BlogData = {
         "从选题、素材、写作、发布到复盘，把个人博客当成一个持续迭代的产品。",
       category: categories[0],
       tags: [tags[0], tags[3]],
-      body: [
-        {
-          _type: "block",
-          _key: "intro",
-          style: "normal",
-          children: [
-            {
-              _type: "span",
-              _key: "intro-span",
-              text: "这是第一篇演示文章。接入 Sanity 后，你可以在后台直接修改、发布和管理文章。"
-            }
-          ]
-        }
-      ],
+      body: "这是第一篇演示文章。接入免费后台后，你可以在后台直接修改、发布和管理文章。",
       featured: true,
       readingTime: "6 min"
     },
@@ -108,7 +95,7 @@ export const demoData: BlogData = {
         "用产品经理视角看 AI 工具的真正价值：不是炫技，而是重构工作流。",
       category: categories[2],
       tags: [tags[1], tags[0]],
-      body: [],
+      body: "",
       featured: true,
       readingTime: "8 min"
     },
@@ -121,7 +108,7 @@ export const demoData: BlogData = {
         "面向模板客户，把创意、需求、定价和交付路径拆成可验证的小实验。",
       category: categories[3],
       tags: [tags[2]],
-      body: [],
+      body: "",
       featured: false,
       readingTime: "5 min"
     }
@@ -132,7 +119,7 @@ export const demoData: BlogData = {
       slug: "pm-knowledge-os",
       summary: "一个面向产品经理的个人知识管理模板。",
       externalUrl: "#",
-      body: []
+      body: ""
     }
   ],
   friends: [

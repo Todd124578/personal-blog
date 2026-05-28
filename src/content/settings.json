@@ -1,0 +1,29 @@
+{
+  "name": "Todd",
+  "title": "Todd的人生记录册",
+  "slogan": "热爱可抵岁月漫长",
+  "description": "一个个人博客，记录产品思考、AI 工作流、工作案例与生活观察。",
+  "avatar": "",
+  "heroImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1800&q=80",
+  "accentColor": "#39ffb6",
+  "socialLinks": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/"
+    },
+    {
+      "label": "即刻",
+      "href": "https://web.okjike.com/"
+    }
+  ],
+  "communityLinks": [
+    {
+      "label": "社群入口",
+      "href": "/guestbook"
+    },
+    {
+      "label": "合作联系",
+      "href": "/about"
+    }
+  ]
+}

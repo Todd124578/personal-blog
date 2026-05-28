@@ -1,7 +1,7 @@
-import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import { Comments } from "@/components/comments";
 import { getBlogData, getPostBySlug } from "@/lib/content";
+import { renderMarkdown } from "@/lib/markdown";
 
 export async function generateStaticParams() {
   const { posts } = await getBlogData();
@@ -48,10 +48,10 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
           ))}
         </div>
         <div className="article-body">
-          {post.body?.length ? (
-            <PortableText value={post.body} />
+          {post.body ? (
+            <div dangerouslySetInnerHTML={{ __html: renderMarkdown(post.body) }} />
           ) : (
-            <p>这篇文章的正文会在你接入 Sanity 后从后台读取。</p>
+            <p>这篇文章的正文会在后台发布后显示。</p>
           )}
         </div>
         <Comments />

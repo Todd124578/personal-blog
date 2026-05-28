@@ -70,7 +70,7 @@ export default async function HomePage() {
             <div>
               <p className="eyebrow">Featured</p>
               <h2>精选文章</h2>
-              <p>先放几篇演示文章。接入 Sanity 后，你可以在后台替换成真实内容。</p>
+              <p>先放几篇示例文章。你可以在后台替换成真实内容。</p>
             </div>
             <Link className="button" href="/posts">
               全部文章

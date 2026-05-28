@@ -10,9 +10,9 @@ The site is aimed at product peers, template buyers, collaborators, and people w
 
 ## Platform Choice
 
-Use Next.js on Vercel for the public site, Sanity as the visual CMS, Giscus for comments, and Vercel Web Analytics for visitor analytics.
+Use Next.js on Vercel for the public site, a free Git-based visual CMS, Giscus for comments, and Vercel Web Analytics for visitor analytics.
 
-This keeps the first version mostly free, with the likely recurring cost limited to a custom domain. Sanity's free plan is enough for a personal publishing site, and Vercel is a strong fit for SEO-oriented Next.js sites.
+This keeps the first version mostly free, with the likely recurring cost limited to a custom domain. Content lives in GitHub so Vercel can rebuild the site after published edits.
 
 ## First Version Scope
 
@@ -74,7 +74,7 @@ The design uses:
 
 ## Content Model
 
-Sanity should provide visual editing for:
+The CMS should provide visual editing for:
 
 - Site settings: name, title, slogan, avatar, hero image, theme color, social links, community links, SEO defaults.
 - Posts: title, slug, status, publish date, cover image, summary, category, tags, body, SEO metadata, featured flag.
@@ -87,9 +87,9 @@ Sanity should provide visual editing for:
 
 ## Architecture
 
-The public site reads published content from Sanity. If Sanity environment variables are missing during local development, the site should fall back to bundled demo content so the design can still run and be previewed.
+The public site reads published content from local JSON files under `src/content`, edited through the CMS.
 
-Next.js App Router handles routes, metadata, sitemap, robots, and RSS. The site should be deployable to Vercel with environment variables for Sanity and Giscus.
+Next.js App Router handles routes, metadata, sitemap, robots, and RSS. The site should be deployable to Vercel with environment variables for Giscus.
 
 ## Out Of Scope For First Version
 
@@ -103,4 +103,4 @@ The first version will not implement paid memberships, payment checkout, private
 - Articles can be represented by CMS data and demo fallback data.
 - SEO metadata, sitemap, robots, and RSS are present.
 - The project can be imported into Vercel.
-- A non-technical owner can edit future posts through Sanity after the Sanity project is connected.
+- A non-technical owner can edit future posts through the Git-based CMS after GitHub access is connected.

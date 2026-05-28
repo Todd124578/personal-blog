@@ -1,0 +1,15 @@
+{
+  "title": "我如何搭建一个产品经理的个人内容系统",
+  "slug": "personal-content-system",
+  "status": "published",
+  "publishedAt": "2026-05-27",
+  "coverImage": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+  "summary": "从选题、素材、写作、发布到复盘，把个人博客当成一个持续迭代的产品。",
+  "category": "product-thinking",
+  "tags": ["product-manager", "productivity"],
+  "body": "这是第一篇演示文章。接入免费后台后，你可以在 /admin 里直接修改、发布和管理文章。",
+  "seoTitle": "",
+  "seoDescription": "",
+  "featured": true,
+  "readingTime": "6 min"
+}

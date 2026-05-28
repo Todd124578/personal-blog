@@ -4,7 +4,7 @@
 
 This is a Vercel-ready personal blog for an internet product manager.
 
-It can run immediately with demo content. After you connect Sanity, you can edit articles in a visual CMS.
+It can run immediately with editable content. The visual CMS at `/admin` saves articles and page data into GitHub, then Vercel republishes the site.
 
 ## Deploy To Vercel
 
@@ -24,19 +24,19 @@ It can run immediately with demo content. After you connect Sanity, you can edit
 5. Follow Vercel's DNS instructions.
 6. Set `NEXT_PUBLIC_SITE_URL` to your final website address.
 
-## Connect Sanity CMS
+## Use The Free CMS
 
-1. Create a free Sanity account.
-2. Create a project and dataset named `production`.
-3. Create document types using `sanity.schemas.md`.
-4. In Vercel project settings, add:
+The site uses a free Git-based CMS. Content is saved into GitHub under `src/content`, and Vercel redeploys after changes are published.
+
+Admin URL:
 
 ```text
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
+https://your-domain.com/admin
 ```
 
-5. Redeploy the Vercel project.
+Login:
+
+Use GitHub token login in the CMS. The token needs repository content write access for `Todd124578/personal-blog`.
 
 ## Connect Comments
 
@@ -56,10 +56,10 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID=
 
 ## Edit Site Text Before Launch
 
-The demo values live in:
+The editable values live in:
 
 ```text
-src/lib/demo-data.ts
+src/content
 ```
 
-You can launch with demo content first, then replace it through Sanity later.
+You can launch first, then replace content through `/admin`.

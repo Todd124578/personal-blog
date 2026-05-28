@@ -45,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <footer className="footer">
             <div className="container footer-inner">
               <span>© 2026 Todd的人生记录册</span>
-              <span>Built with Next.js, Vercel and Sanity.</span>
+              <span>Built with Next.js, Vercel and a free Git CMS.</span>
             </div>
           </footer>
         </div>

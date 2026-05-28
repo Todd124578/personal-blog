@@ -1,5 +1,3 @@
-import type { PortableTextBlock } from "@portabletext/types";
-
 export type ContentStatus = "draft" | "published";
 
 export type SiteLink = {
@@ -40,7 +38,7 @@ export type Post = {
   summary: string;
   category: Category;
   tags: Tag[];
-  body: PortableTextBlock[];
+  body: string;
   seoTitle?: string;
   seoDescription?: string;
   featured: boolean;
@@ -53,7 +51,7 @@ export type Project = {
   coverImage?: string;
   summary: string;
   externalUrl?: string;
-  body: PortableTextBlock[];
+  body: string;
 };
 
 export type Friend = {

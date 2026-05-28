@@ -1,69 +1,73 @@
-import { createClient } from "@sanity/client";
-import { demoData } from "./demo-data";
-import type { BlogData } from "./types";
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+import type {
+  BlogData,
+  Category,
+  Friend,
+  GuestbookEntry,
+  MediaPick,
+  Post,
+  Project,
+  SiteSettings,
+  Tag
+} from "./types";
 
-type RuntimeEnv = Partial<Record<string, string | undefined>>;
+type RawPost = Omit<Post, "category" | "tags"> & {
+  category: string;
+  tags: string[];
+};
 
-const apiVersion = "2025-02-19";
+const contentRoot = path.join(process.cwd(), "src", "content");
 
-export function hasSanityConfig(env: RuntimeEnv = process.env) {
-  return Boolean(env.NEXT_PUBLIC_SANITY_PROJECT_ID && env.NEXT_PUBLIC_SANITY_DATASET);
+async function readJsonFile<T>(...segments: string[]) {
+  const file = await readFile(path.join(contentRoot, ...segments), "utf-8");
+  return JSON.parse(file) as T;
 }
 
-function createSanityClient(env: RuntimeEnv = process.env) {
-  if (!hasSanityConfig(env)) {
-    return null;
-  }
+async function readJsonDir<T>(directory: string) {
+  const dir = path.join(contentRoot, directory);
+  const files = (await readdir(dir)).filter((file) => file.endsWith(".json")).sort();
 
-  return createClient({
-    projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: env.NEXT_PUBLIC_SANITY_DATASET,
-    apiVersion,
-    useCdn: true
-  });
+  return Promise.all(files.map((file) => readJsonFile<T>(directory, file)));
 }
 
-const settingsQuery = `*[_type == "siteSettings"][0]`;
-const categoriesQuery = `*[_type == "category"] | order(title asc)`;
-const tagsQuery = `*[_type == "tag"] | order(title asc)`;
-const postsQuery = `*[_type == "post" && status == "published"] | order(publishedAt desc) {
-  ...,
-  category->,
-  tags[]->
-}`;
-const projectsQuery = `*[_type == "project"] | order(title asc)`;
-const friendsQuery = `*[_type == "friend"] | order(name asc)`;
-const mediaPicksQuery = `*[_type == "mediaPick"] | order(title asc)`;
-const guestbookQuery = `*[_type == "guestbookEntry" && approved == true] | order(createdAt desc)`;
+function bySlug<T extends { slug: string }>(items: T[]) {
+  return new Map(items.map((item) => [item.slug, item]));
+}
 
-export async function getBlogData(env: RuntimeEnv = process.env): Promise<BlogData> {
-  const client = createSanityClient(env);
-
-  if (!client) {
-    return demoData;
-  }
-
-  const [settings, categories, tags, posts, projects, friends, mediaPicks, guestbookEntries] =
+export async function getBlogData(): Promise<BlogData> {
+  const [settings, categories, tags, rawPosts, projects, friends, mediaPicks, guestbookEntries] =
     await Promise.all([
-      client.fetch(settingsQuery),
-      client.fetch(categoriesQuery),
-      client.fetch(tagsQuery),
-      client.fetch(postsQuery),
-      client.fetch(projectsQuery),
-      client.fetch(friendsQuery),
-      client.fetch(mediaPicksQuery),
-      client.fetch(guestbookQuery)
+      readJsonFile<SiteSettings>("settings.json"),
+      readJsonDir<Category>("categories"),
+      readJsonDir<Tag>("tags"),
+      readJsonDir<RawPost>("posts"),
+      readJsonDir<Project>("projects"),
+      readJsonDir<Friend>("friends"),
+      readJsonDir<MediaPick>("media"),
+      readJsonDir<GuestbookEntry>("guestbook")
     ]);
 
+  const categoryMap = bySlug(categories);
+  const tagMap = bySlug(tags);
+  const posts = rawPosts
+    .filter((post) => post.status === "published")
+    .map((post) => ({
+      ...post,
+      category: categoryMap.get(post.category) ?? categories[0],
+      tags: post.tags.map((tag) => tagMap.get(tag)).filter(Boolean) as Tag[]
+    }))
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+
   return {
-    settings: settings ?? demoData.settings,
-    categories: categories?.length ? categories : demoData.categories,
-    tags: tags?.length ? tags : demoData.tags,
-    posts: posts?.length ? posts : demoData.posts,
-    projects: projects?.length ? projects : demoData.projects,
-    friends: friends?.length ? friends : demoData.friends,
-    mediaPicks: mediaPicks?.length ? mediaPicks : demoData.mediaPicks,
-    guestbookEntries: guestbookEntries?.length ? guestbookEntries : demoData.guestbookEntries
+    settings,
+    categories,
+    tags,
+    posts,
+    projects,
+    friends,
+    mediaPicks,
+    guestbookEntries: guestbookEntries.filter((entry) => entry.approved)
   };
 }
 
